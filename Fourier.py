@@ -45,10 +45,10 @@ def TFourier(ft,t):
 	F2=F[0:int(N/2)]*2/np.mean(F)
 	freq2=freq[0:int(N/2)]
 
-	return F2,freq2
+	return F2,freq2,dt
 
-F1,freq1=TFourier(ft1,t1)
-F2,freq2=TFourier(ft2,t2)
+F1,freq1,dt1=TFourier(ft1,t1)
+F2,freq2,dt2=TFourier(ft2,t2)
 
 #Se grafican ambas transformadas de fourier
 plt.figure()
@@ -66,18 +66,21 @@ plt.ylabel("F")
 
 plt.tight_layout()
 
-fourier = np.fft.fft(ft2)
-freq=np.fft.fftfreq(len(ft2),d=t2[10]-t2[9])
+plt.savefig("transformadasOndas.pdf")
+print("Se uso la implementacion propia de la transformada de fourier")
+
+#Espectograma
 
 plt.figure()
-plt.subplot(211)
-plt.plot(freq[0:int(len(t2)/2-1)],fourier[0:int(len(t2)/2-1)],"-",label="fftfreq")
-plt.subplot(212)
-plt.plot(freq1,F1,'orange')
-plt.title("Suma de las ondas")
-plt.xlabel("frecuencia")
-plt.ylabel("F")
+plt.specgram(ft1,Fs=int(1/dt1))
+plt.xlabel("tiempo")
+plt.ylabel("frecuencia")
+plt.title("Espectrograma de la suma de ondas")
+plt.savefig("EspectroSum.pdf")
 
-plt.show()
-
-
+plt.figure()
+plt.specgram(ft2,Fs=int(1/dt2))
+plt.xlabel("tiempo")
+plt.ylabel("frecuencia")
+plt.title("Espectrograma de las ondas por separado")
+plt.savefig("EspectroSignal.pdf")
