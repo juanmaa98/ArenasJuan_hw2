@@ -112,4 +112,13 @@ plt.title("Transformada de fourier Temblor")
 plt.xlabel("frecuencia [Hz]")
 plt.ylabel("Amplitud")
 
-plt.savefig("Transformadatemblor.pdf")
+plt.savefig("TransformadaTemblor.pdf")
+
+#Espectrograma de la senal
+
+plt.figure()
+plt.specgram(ft,Fs=Fs)
+plt.xlabel("tiempo [s]")
+plt.ylabel("frecuencia [Hz]")
+plt.title("Espectrograma de la senal")
+plt.savefig("EspecTemblor.pdf")
