@@ -100,3 +100,16 @@ plt.xlabel("tiempo [s]")
 plt.ylabel("Amplitud")
 
 plt.savefig("temblor.pdf")
+
+#Transformada de fourier usando scipy
+
+F=np.fft.fft(ft)
+freq=np.fft.fftfreq(N,d=dt)
+
+plt.figure()
+plt.plot(freq[np.where(freq.real>=0)],F[np.where(freq.real>=0)])
+plt.title("Transformada de fourier Temblor")
+plt.xlabel("frecuencia [Hz]")
+plt.ylabel("Amplitud")
+
+plt.savefig("Transformadatemblor.pdf")
