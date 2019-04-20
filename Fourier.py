@@ -84,3 +84,19 @@ plt.xlabel("tiempo")
 plt.ylabel("frecuencia")
 plt.title("Espectrograma de las ondas por separado")
 plt.savefig("EspectroSignal.pdf")
+
+#Terremoto
+
+ft=np.genfromtxt("temblor.txt")
+N=len(ft)
+Fs=100
+dt=1.0/Fs
+t=np.linspace(0,dt*N,N)
+
+plt.figure()
+plt.plot(t,ft)
+plt.title("Temblor")
+plt.xlabel("tiempo [s]")
+plt.ylabel("Amplitud")
+
+plt.savefig("temblor.pdf")
