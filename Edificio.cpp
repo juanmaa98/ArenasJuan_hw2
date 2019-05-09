@@ -7,32 +7,39 @@ float y=0.0;
 float k=2000;
 float m=1000.0;
 float w=1.0*sqrt(k/m);
-#define PI 3.14159265
+int N=30000;
 
-int v1_prima(float t,float u1,float v1,float u2,float& a1){
+int v1_prima(float w,float t,float u1,float v1,float u2,float& a1){
 	float F=sin(w*t);
 	a1= (-y*v1-2*k*u1+k*u2+F)/m;
 	return 0;
 	
 }
 
-int v2_prima(float t,float u2,float v2,float u1,float u3,float& a2){
+int v2_prima(float w,float t,float u2,float v2,float u1,float u3,float& a2){
 	a2= (-y*v2+k*u1-2*k*u2+k*u3)/m;
 	return 0;
 	
 }
 
-int v3_prima(float t,float u3,float v3,float u2,float& a3){
+int v3_prima(float w,float t,float u3,float v3,float u2,float& a3){
 	a3= (-y*v3+k*u2-k*u3)/m;
 	return 0;
 	
 }
-
+float mayor(float u[]){
+	float umax=abs(u[0]);
+	for(int i=1;i<N;i++){
+		if(abs(u[i])>=abs(u[i-1])){
+			umax=abs(u[i]);
+		}
+	}
+	return umax;
+}
 int main () {
 	float x0=0;
 	float v0=0;
 	float dt=0.001;
-	int N=3000;
 
 	float v1[N]={0};
 	float u1[N]={0};
@@ -52,9 +59,9 @@ int main () {
 	for(int i=1;i<N;i++){
 		t[i]=t[i-1]+dt;
 		
-		v1_prima(t[i-1],u1[i-1],v1[i-1],u2[i-1],a1[i-1]);
-		v2_prima(t[i-1],u2[i-1],v2[i-1],u1[i-1],u3[i-1],a2[i-1]);
-		v3_prima(t[i-1],u3[i-1],v3[i-1],u2[i-1],a3[i-1]);
+		v1_prima(w,t[i-1],u1[i-1],v1[i-1],u2[i-1],a1[i-1]);
+		v2_prima(w,t[i-1],u2[i-1],v2[i-1],u1[i-1],u3[i-1],a2[i-1]);
+		v3_prima(w,t[i-1],u3[i-1],v3[i-1],u2[i-1],a3[i-1]);
 
 		float kv1_1=dt*a1[i-1];
 		float ku1_1=dt*v1[i-1];
@@ -69,9 +76,9 @@ int main () {
 		float a2_2=0;
 		float a3_2=0;
 
-		v1_prima(t[i-1]+dt*0.5,u1[i-1]+0.5*ku1_1,v1[i-1]+0.5*kv1_1,u2[i-1]+0.5*ku2_1,a1_2);
-		v2_prima(t[i-1]+dt*0.5,u2[i-1]+0.5*ku2_1,v2[i-1]+0.5*kv2_1,u1[i-1]+0.5*ku1_1,u3[i-1]+0.5*ku3_1,a2_2);
-		v3_prima(t[i-1]+dt*0.5,u3[i-1]+0.5*ku3_1,v3[i-1]+0.5*kv3_1,u2[i-1]+0.5*ku2_1,a3_2);
+		v1_prima(w,t[i-1]+dt*0.5,u1[i-1]+0.5*ku1_1,v1[i-1]+0.5*kv1_1,u2[i-1]+0.5*ku2_1,a1_2);
+		v2_prima(w,t[i-1]+dt*0.5,u2[i-1]+0.5*ku2_1,v2[i-1]+0.5*kv2_1,u1[i-1]+0.5*ku1_1,u3[i-1]+0.5*ku3_1,a2_2);
+		v3_prima(w,t[i-1]+dt*0.5,u3[i-1]+0.5*ku3_1,v3[i-1]+0.5*kv3_1,u2[i-1]+0.5*ku2_1,a3_2);
 
 		float kv1_2=dt*a1_2;
 		float ku1_2=dt*(v1[i-1]+0.5*kv1_1);
@@ -82,9 +89,9 @@ int main () {
 		float kv3_2=dt*a3_2;
 		float ku3_2=dt*(v3[i-1]+0.5*kv3_1);
 
-		v1_prima(t[i-1]+dt*0.5,u1[i-1]+0.5*ku1_2,v1[i-1]+0.5*kv1_2,u2[i-1]+0.5*ku2_2,a1_2);
-		v2_prima(t[i-1]+dt*0.5,u2[i-1]+0.5*ku2_2,v2[i-1]+0.5*kv2_2,u1[i-1]+0.5*ku1_2,u3[i-1]+0.5*ku3_2,a2_2);
-		v3_prima(t[i-1]+dt*0.5,u3[i-1]+0.5*ku3_2,v3[i-1]+0.5*kv3_2,u2[i-1]+0.5*ku2_2,a3_2);
+		v1_prima(w,t[i-1]+dt*0.5,u1[i-1]+0.5*ku1_2,v1[i-1]+0.5*kv1_2,u2[i-1]+0.5*ku2_2,a1_2);
+		v2_prima(w,t[i-1]+dt*0.5,u2[i-1]+0.5*ku2_2,v2[i-1]+0.5*kv2_2,u1[i-1]+0.5*ku1_2,u3[i-1]+0.5*ku3_2,a2_2);
+		v3_prima(w,t[i-1]+dt*0.5,u3[i-1]+0.5*ku3_2,v3[i-1]+0.5*kv3_2,u2[i-1]+0.5*ku2_2,a3_2);
 
 		float kv1_3=dt*a1_2;
 		float ku1_3=dt*(v1[i-1]+0.5*kv1_2);
@@ -95,9 +102,9 @@ int main () {
 		float kv3_3=dt*a3_2;
 		float ku3_3=dt*(v3[i-1]+0.5*kv3_2);
 
-		v1_prima(t[i-1]+dt,u1[i-1]+ku1_3,v1[i-1]+kv1_3,u2[i-1]+ku2_3,a1_2);
-		v2_prima(t[i-1]+dt,u2[i-1]+ku2_3,v2[i-1]+kv2_3,u1[i-1]+ku1_3,u3[i-1]+ku3_3,a2_2);
-		v3_prima(t[i-1]+dt,u3[i-1]+ku3_3,v3[i-1]+kv3_3,u2[i-1]+ku2_3,a3_2);
+		v1_prima(w,t[i-1]+dt,u1[i-1]+ku1_3,v1[i-1]+kv1_3,u2[i-1]+ku2_3,a1_2);
+		v2_prima(w,t[i-1]+dt,u2[i-1]+ku2_3,v2[i-1]+kv2_3,u1[i-1]+ku1_3,u3[i-1]+ku3_3,a2_2);
+		v3_prima(w,t[i-1]+dt,u3[i-1]+ku3_3,v3[i-1]+kv3_3,u2[i-1]+ku2_3,a3_2);
 
 		float kv1_4=dt*a1_2;
 		float ku1_4=dt*(v1[i-1]+kv1_3);
@@ -127,5 +134,14 @@ int main () {
 		u3[i]=u3[i-1]+ku3_prom;
 	
 	}
+	
+	float u1max=mayor(u1);
+	float u2max=mayor(u2);
+	float u3max=mayor(u3);
+	
+	ofstream outfile;
+	outfile.open("umax.dat");
+	outfile <<w<<" "<<u1max<<" "<<u2max<<" "<<u3max<<endl;
+	outfile.close();
 	return 0;
 }
