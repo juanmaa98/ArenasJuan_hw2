@@ -2,39 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy
 
-ft=np.genfromtxt("temblor.txt")
-N=len(ft)
-Fs=100
-dt=1.0/Fs
-t=np.linspace(0,dt*N,N)
+datos=np.genfromtxt("umax.dat")
+
+w=datos[:,0]
+u1=datos[:,1]
+u2=datos[:,2]
+u3=datos[:,3]
 
 plt.figure()
-plt.plot(t,ft)
-plt.title("Temblor")
-plt.xlabel("tiempo [s]")
+plt.plot(w,u1,label="u1")
+plt.plot(w,u2,label="u2")
+plt.plot(w,u3,label="u3")
+plt.title("Edificio en sismo")
+plt.xlabel("frecuencia angular [rad/s]")
 plt.ylabel("Amplitud")
+plt.legend()
 
-plt.savefig("temblor.pdf")
-
-#Transformada de fourier usando scipy
-
-F=np.fft.fft(ft)
-freq=np.fft.fftfreq(N,d=dt)
-
-plt.figure()
-plt.plot(freq[np.where(freq.real>=0)],F[np.where(freq.real>=0)])
-plt.title("Transformada de fourier Temblor")
-plt.xlabel("frecuencia [Hz]")
-plt.ylabel("Amplitud")
-
-plt.savefig("TransformadaTemblor.pdf")
-
-#Espectrograma de la senal
-
-plt.figure()
-plt.specgram(ft,Fs=Fs)
-plt.xlabel("tiempo [s]")
-plt.ylabel("frecuencia [Hz]")
-plt.title("Espectrograma de la senal")
-plt.savefig("EspecTemblor.pdf")
+plt.savefig("uvsw.pdf")
 
