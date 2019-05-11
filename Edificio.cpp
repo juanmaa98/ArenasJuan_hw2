@@ -49,6 +49,18 @@ int main () {
 	float u2w1[N]={0};
 	float u3w1[N]={0};
 
+	float u1w2[N]={0};
+	float u2w2[N]={0};
+	float u3w2[N]={0};
+
+	float u1w3[N]={0};
+	float u2w3[N]={0};
+	float u3w3[N]={0};
+
+	float u1w4[N]={0};
+	float u2w4[N]={0};
+	float u3w4[N]={0};
+
 	for (int i=0;i<Nw;i++){
 		w[i]=(((3-0.2)/(Nw-1))*i+0.2)*sqrt(k/m);
 	}
@@ -159,6 +171,31 @@ int main () {
 				u3w1[m]=u3[m];
 				}
 		}
+
+		if(k==37){
+			for(int m=0;m<N;m++){				
+				u1w2[m]=u1[m];
+				u2w2[m]=u2[m];
+				u3w2[m]=u3[m];
+				}
+		}
+
+		if(k==57){
+			for(int m=0;m<N;m++){				
+				u1w3[m]=u1[m];
+				u2w3[m]=u2[m];
+				u3w3[m]=u3[m];
+				}
+		}
+
+		if(k==99){
+			for(int m=0;m<N;m++){				
+				u1w4[m]=u1[m];
+				u2w4[m]=u2[m];
+				u3w4[m]=u3[m];
+				}
+		}
+
 		u1max=mayor(u1);
 		u2max=mayor(u2);
 		u3max=mayor(u3);
@@ -170,6 +207,23 @@ int main () {
 	outfile.open("uw1.dat");
 	for(int m=0;m<N;m++){				
 					outfile <<w[9]<<" "<<t[m]<<" "<<u1w1[m]<<" "<<u2w1[m]<<" "<<u3w1[m]<<endl;
+	}
+	outfile.close();
+	
+	outfile.open("uw2.dat");
+	for(int m=0;m<N;m++){				
+					outfile <<w[37]<<" "<<t[m]<<" "<<u1w2[m]<<" "<<u2w2[m]<<" "<<u3w2[m]<<endl;
+	}
+	outfile.close();
+
+	outfile.open("uw3.dat");
+	for(int m=0;m<N;m++){				
+					outfile <<w[57]<<" "<<t[m]<<" "<<u1w3[m]<<" "<<u2w3[m]<<" "<<u3w3[m]<<endl;
+	}
+
+	outfile.open("uw4.dat");
+	for(int m=0;m<N;m++){				
+					outfile <<w[57]<<" "<<t[m]<<" "<<u1w4[m]<<" "<<u2w4[m]<<" "<<u3w4[m]<<endl;
 	}
 	outfile.close();
 	return 0;
