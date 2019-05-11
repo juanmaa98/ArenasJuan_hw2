@@ -6,7 +6,7 @@ using namespace std;
 float y=0.0;
 float k=2000;
 float m=1000.0;
-int N=30000;
+int N=50000;
 
 int v1_prima(float w,float t,float u1,float v1,float u2,float& a1){
 	float F=sin(w*t);
@@ -29,7 +29,7 @@ int v3_prima(float w,float t,float u3,float v3,float u2,float& a3){
 float mayor(float u[]){
 	float umax=abs(u[0]);
 	for(int i=1;i<N;i++){
-		if(abs(u[i])>=abs(u[i-1])){
+		if(abs(u[i])>abs(u[i-1])){
 			umax=abs(u[i]);
 		}
 	}
@@ -38,29 +38,16 @@ float mayor(float u[]){
 int main () {
 	float x0=0;
 	float v0=0;
-	float dt=0.001;
-
-	float v1[N]={0};
-	float u1[N]={0};
-
-	float v2[N]={0};
-	float u2[N]={0};
-
-	float v3[N]={0};
-	float u3[N]={0};
-
-	float t[N]={0};
-
-	float a1[N]={0};
-	float a2[N]={0};
-	float a3[N]={0};
-
-	float u1max=0;
-	float u2max=0;
-	float u3max=0;
+	float dt=0.005;
 	
 	int Nw=100;
 	float w[Nw]={0};
+
+	float t[N]={0};
+		
+	float u1w1[N]={0};
+	float u2w1[N]={0};
+	float u3w1[N]={0};
 
 	for (int i=0;i<Nw;i++){
 		w[i]=(((3-0.2)/(Nw-1))*i+0.2)*sqrt(k/m);
@@ -70,6 +57,22 @@ int main () {
 	outfile.open("umax.dat");
 
 	for(int k=0;k<Nw;k++){
+		float v1[N]={0};
+		float u1[N]={0};
+
+		float v2[N]={0};
+		float u2[N]={0};
+
+		float v3[N]={0};
+		float u3[N]={0};
+
+		float a1[N]={0};
+		float a2[N]={0};
+		float a3[N]={0};
+
+		float u1max=0;
+		float u2max=0;
+		float u3max=0;
 		for(int i=1;i<N;i++){
 			t[i]=t[i-1]+dt;
 			
@@ -146,14 +149,27 @@ int main () {
 
 			v3[i]=v3[i-1]+kv3_prom;
 			u3[i]=u3[i-1]+ku3_prom;
-		
+			
 		}
 		
+		if(k==9){
+			for(int m=0;m<N;m++){				
+				u1w1[m]=u1[m];
+				u2w1[m]=u2[m];
+				u3w1[m]=u3[m];
+				}
+		}
 		u1max=mayor(u1);
 		u2max=mayor(u2);
 		u3max=mayor(u3);
 		
 		outfile <<w[k]<<" "<<u1max<<" "<<u2max<<" "<<u3max<<endl;
+	}
+	outfile.close();
+
+	outfile.open("uw1.dat");
+	for(int m=0;m<N;m++){				
+					outfile <<w[9]<<" "<<t[m]<<" "<<u1w1[m]<<" "<<u2w1[m]<<" "<<u3w1[m]<<endl;
 	}
 	outfile.close();
 	return 0;
