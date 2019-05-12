@@ -15,15 +15,12 @@ transformadasOndas.pdf : Fourier.py temblor.txt signal.dat signalSuma.dat
 ondas.pdf: Fourier.py temblor.txt signal.dat signalSuma.dat
 	python3 Fourier.py
 
-uvsw.pdf uw1.pdf uw2.pdf uw3.pdf uw4.pdf : Plots_hw2.py umax.dat uw1.dat uw2.dat uw3.dat uw4.dat
+uvsw.pdf uw1.pdf uw2.pdf uw3.pdf uw4.pdf uvswf.pdf uw1f.pdf uw2f.pdf uw3f.pdf uw4f.pdf: Plots_hw2.py umax.dat uw1.dat uw2.dat uw3.dat uw4.dat umaxf.dat uw1f.dat uw2f.dat uw3f.dat uw4f.dat
 	python3 Plots_hw2.py
 
 umax.dat uw1.dat uw2.dat uw3.dat uw4.dat: Edificio.cpp
 	g++ Edificio.cpp
 	./a.out
-
-uvswf.pdf uw1f.pdf uw2f.pdf uw3f.pdf uw4f.pdf : Plots_hw2.py umaxf.dat uw1f.dat uw2f.dat uw3f.dat uw4f.dat
-	python3 Plots_hw2.py
 
 umaxf.dat uw1f.dat uw2f.dat uw3f.dat uw4f.dat: EdificioGamma.cpp
 	g++ EdificioGamma.cpp
