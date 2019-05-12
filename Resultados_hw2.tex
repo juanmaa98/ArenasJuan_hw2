@@ -19,59 +19,92 @@
 \begin{document}
 \begin{center}
 {\Large Métodos Computacionales} \\
+\textsc{Juan Manuel Arenas}\\
+\textsc{201515480}\\
 \textsc{Tarea 2}\\
-01-2019\\
+11-05-2019\\
 \end{center}
 
 \noindent
 \section{Ejercicio 1: Fourier}
+
+\subsection{Grafica de ambos datos}
 \begin{center}
 \includegraphics[width=10cm]{ondas.pdf}
 \end{center}
 
+\subsection{Transformada de Fourier para ambos datos}
 \begin{center}
 \includegraphics[width=10cm]{transformadasOndas.pdf}
 \end{center}
+En este caso se puede ver que ambos datos tienen las mismas frecuencias, ya que en el primero una parte de la señal tiene una frecuencia y la otra parte tiene un freecuencia diferente. En el segundo caso, las señal es la suma de las dos señales anteriores, por esto se observan los picos en las frecuencuias de estas dos señales.
 
+\subsection{Espectrograma de las señales}
 \begin{center}
 \includegraphics[width=10cm]{EspectroSignal.pdf}
 \end{center}
-
+En este espectrograma se puede ver que en la primera parte la señal tiene una frecuencia y luego tiene otra.
 \begin{center}
 \includegraphics[width=10cm]{EspectroSum.pdf}
 \end{center}
-
+Por otro lado, en este espectrograma se peude ver que la onda siempre está comprendida por dos ondas superpuestas de diferente frecuencia
+\subsection{Datos del temblor}
 \begin{center}
 \includegraphics[width=10cm]{temblor.pdf}
 \end{center}
-
+En este caso se puede observar que la amplitud del temblor en los últimos doscientos segundos es mayor y que esta onda no es periodica.
+\subsection{Transformada de Fourier del temblor}
 \begin{center}
 \includegraphics[width=10cm]{TransformadaTemblor.pdf}
 \end{center}
-
+En esta gráfica se puede observar que los datos del temblor son una superposición de ondas que van desde los 0 Hz a aproximadamente 30 Hz. De ahí en adelante se puede hacer un filtro para eliminar el ruido.
+\subsection{Espectrograma del temblor}
 \begin{center}
 \includegraphics[width=10cm]{EspecTemblor.pdf}
 \end{center}
-
+En este espectrograma se puede ver que la frecuencia de las ondas que componen el templor van desde 0 a 45 Hz. Además,  se puede observar que a partir de aproximadamente 550 segundos la amplitud del temblor aumenta, y que las ondas de menor frecuencia son las que más aportan a la amplitud total del temblor.
 \section{Ejercicio 2: Edificio en Sismo}
 \begin{center}
 \includegraphics[width=10cm]{uvsw.pdf}
 \end{center}
-
+En esta gráfica se pueden observar tres picos que corresponden a las frecuencias de resonancia del sistema. Estas frecuencias de resonancia son cada una de las frecuencias de los modos normales de oscilación del sistema. Estas amplitudes máximas van a tender a infinito ya que no se tiene amortiguación. Además se puede observar que a medida que la frecuencia tiende a ser muy grande la amplitud del sistema tiende a cero.
 \begin{center}
 \includegraphics[width=10cm]{uw1.pdf}
 \end{center}
-
+En este caso, se observa el primer modo normal de oscilación del sistema, el cual es que todos los bloques oscilan en fase. Además como se trata de una frecuencia de resonancia se puede ver que la amplitud va aumentando gradualmente con el tiempo.
 \begin{center}
 \includegraphics[width=10cm]{uw2.pdf}
 \end{center}
-
+En esta gráfica se observa el segundo modo normal de oscilación, que corresponde a el bloque dos y el bloque 1 oscilando en fase y el bloque 3 oscilando en desfase de 90 grados respecto a estos. En este caso, al ser también una frecuencia natural de oscilación del sistema, la amplitud va a crecer con el tiempo. 
 \begin{center}
 \includegraphics[width=10cm]{uw3.pdf}
 \end{center}
-
+Este es el tercer modo normal de oscilación del sistema. Se observan al bloque 3 y al bloque 1 oscilando en fase, y el bloque 2 en desfase. En este caso, otra vez la amplitud va a crecer gradualmente con el tiempo.
 \begin{center}
 \includegraphics[width=10cm]{uw4.pdf}
 \end{center}
+En este caso, se selecciona una frecuencia cercana a la del segundo modo normal. Esto con el fin de observar el fenómeno de pulsaciones. Como se peude ver, la amplitud de cada uno de los bloques varía periodicamente, de tal manera que se puede obtener un perido de pulsación. Además, como en el segundo modo normal, se puede ver que el bloque 1 y el 2 están oscilando en fase.
+\subsubsection*{BONO: $\gamma > 0$}
 
+A continuación se presentan las gráficas para el caso en que se considera el coeficiente de amortiguamiento $\gamma=50$.
+\begin{center}
+\includegraphics[width=10cm]{uvswf.pdf}
+\end{center}
+A diferencia de la gráfica anterior, en las frecuencias de los modos normales, la amplitud no diverge precisamente a que ahora hay un coeficiente de amortiguamiento.
+\begin{center}
+\includegraphics[width=10cm]{uw1f.pdf}
+\end{center}
+
+\begin{center}
+\includegraphics[width=10cm]{uw2f.pdf}
+\end{center}
+
+\begin{center}
+\includegraphics[width=10cm]{uw3f.pdf}
+\end{center}
+En estos tres casos anteriores se puede observar que los modos normales de oscilación son los mismos, pero esta vez las amplitudes de oscilación tienden a estabilizarse en algún valor.
+\begin{center}
+\includegraphics[width=10cm]{uw4f.pdf}
+\end{center}
+En esta grafica ya no se puede apreciar el fenómeno de pulsaciones, pero se puede apreciar que la amplitud oscila periodicamente respecto a cierto valor, pero debido a la fricción la amplitud va a tender a ese valor.
 \end{document}
